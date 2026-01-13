@@ -20,8 +20,11 @@ int parse_input(char input[INPUT_LINE_LENGTH]) {
 
   char distance[4];
 
-  for (int i = 0; i < INPUT_LINE_LENGTH - 1 && distance[i] != '\0'; ++i) {
-    distance[i] = *(input)++;
+  int i;
+
+  for (i = 0; i < INPUT_LINE_LENGTH - 1; ++i) {
+    distance[i] = *input;
+    ++input;
   }
 
   int new_distance = atoi(distance);
@@ -52,9 +55,6 @@ int count_zeros(char input[INPUT_FILE_LENGTH][INPUT_LINE_LENGTH]) {
     int parsed_distance = parse_input(input[i]);
 
     dial_num = rotate_dial(dial_num, parsed_distance);
-
-    printf("Input: %s, Dist: %d, Dial: %d\n", input[i], parsed_distance,
-           dial_num);
 
     if (dial_num == 0) {
       ++count;
