@@ -2,9 +2,9 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define INPUT_FILE "input.txt"
+#define INPUT_FILE "input1.txt"
 #define INPUT_FILE_LENGTH 5000
-#define INPUT_LINE_LENGTH 5
+#define INPUT_LINE_LENGTH 6
 
 // Goal : number of times the dial is
 // left pointing at 0 after any rotation in the sequence
@@ -15,16 +15,12 @@ int parse_input(char input[INPUT_LINE_LENGTH]) {
 
   char direction = input[0];
 
-  // skipping over one
-  ++input;
-
-  char distance[4];
+  char distance[INPUT_LINE_LENGTH - 1];
 
   int i;
 
   for (i = 0; i < INPUT_LINE_LENGTH - 1; ++i) {
-    distance[i] = *input;
-    ++input;
+    distance[i] = input[i + 1];
   }
 
   int new_distance = atoi(distance);
@@ -51,7 +47,6 @@ int count_zeros(char input[INPUT_FILE_LENGTH][INPUT_LINE_LENGTH]) {
   int dial_num = 50;
 
   while (strcmp(input[i], "EOF") != 0) {
-
     int parsed_distance = parse_input(input[i]);
 
     dial_num = rotate_dial(dial_num, parsed_distance);
@@ -81,7 +76,9 @@ int main() {
   int i = 0;
 
   while (fgets(input_array[i], INPUT_LINE_LENGTH, fptr)) {
+    // cut off newline character if it exists
     input_array[i][strcspn(input_array[i], "\n")] = 0;
+    printf("%s \n", input_array[i]);
     i++;
   }
 
