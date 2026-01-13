@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define INPUT_FILE "input1.txt"
+#define INPUT_FILE "input.txt"
 #define INPUT_FILE_LENGTH 5000
 #define INPUT_LINE_LENGTH 6
 
