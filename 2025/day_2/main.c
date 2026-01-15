@@ -44,16 +44,19 @@ int main() {
   int end_range_idx = 0;
   int start_or_end = 0; // 0 for start, 1 for end
 
-  while ((ch = fgetc(fptr)) != EOF) {
+  while (ch = fgetc(fptr)) {
     if (ch == '-') {
       start_or_end = 1;
-    } else if (ch == ',') {
+    } else if (ch == ',' || ch == EOF) {
       process_ranges(start_range, end_range);
       start_range_idx = 0;
       end_range_idx = 0;
       start_range[0] = '\0';
       end_range[0] = '\0';
       start_or_end = 0;
+      if (ch == EOF) {
+        break;
+      }
     } else if (ch >= '0' && ch <= '9') {
       if (start_or_end == 0) {
         start_range[start_range_idx++] = ch;
